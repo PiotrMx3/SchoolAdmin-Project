@@ -6,6 +6,7 @@
         {
             Console.WriteLine("Wat Wil jij doen ?");
             Console.WriteLine("1: DemonstreerStudenten uitvoren.");
+            Console.WriteLine("2: DemonstreerCursussen uitvoren.");
 
             string k = Console.ReadLine() ?? "";
 
@@ -14,10 +15,59 @@
                 case "1":
                     DemoStudents();
                     break;
+                case "2":
+                    DemoCourses();
+                    break;
                 default:
                     Console.WriteLine("Fout maak een nieuwe keuze !");
                     break;
             }
+
+        }
+
+
+        public static void DemoCourses()
+        {
+            Student said = new();
+            said.Name = "Said Aziz";
+
+            Student mieke = new();
+            mieke.Name = "Mieke Vermeulen";
+
+            Course communicatie = new();
+            communicatie.Title = "Communicatie";
+
+            Course programmeren = new();
+            programmeren.Title = "Programmeren";
+
+            Course webtechnologie = new();
+            webtechnologie.Title = "Webtechnologie";
+
+            Course databanken = new();
+            databanken.Title = "Databanken";
+
+            communicatie.Students.Add(said);
+            communicatie.Students.Add(mieke);
+
+
+            programmeren.Students.Add(said);
+            programmeren.Students.Add(mieke);
+
+            webtechnologie.Students.Add(said);
+
+            databanken.Students.Add(mieke);
+
+            communicatie.ShowOverview();
+            Console.WriteLine();
+            programmeren.ShowOverview();
+            Console.WriteLine();
+            webtechnologie.ShowOverview();
+            Console.WriteLine();
+            databanken.ShowOverview();
+            Console.WriteLine();
+
+
+
 
         }
 
@@ -39,7 +89,7 @@
 
 
             Student mieke = new();
-            mieke.Name = "Said Aziz";
+            mieke.Name = "Mieke Vermeulen";
             mieke.Birthdate = new DateTime(1998, 1, 1);
             mieke.StudentNmber = Student.StudentCounter;
 
