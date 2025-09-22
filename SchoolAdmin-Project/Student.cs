@@ -21,9 +21,24 @@ namespace SchoolAdmin_Project
             private set { this._coursesResults = value; }
         }
 
+
+        public int Age
+        {
+            get 
+            {
+
+                DateTime now = DateTime.Now;
+                int age = now.Year - Birthdate.Year;
+
+                if (Birthdate.Date > now.AddYears(-age)) age--;
+
+
+                return age;
+            }
+        }
         public void ShowOverview()
         {
-            Console.WriteLine(this.Name);
+            Console.WriteLine($"{this.Name} ({Age})");
             Console.WriteLine($"Werkbelasting: {DetermineWorkload()}");
             Console.WriteLine();
             Console.WriteLine("Cijferrapport");
@@ -57,8 +72,6 @@ namespace SchoolAdmin_Project
             newCourseResult.Result = result;
 
             CoursesResults.Add(newCourseResult);
-
-
 
         }
         public string GenerateNameCard()
