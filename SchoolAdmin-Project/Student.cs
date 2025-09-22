@@ -12,8 +12,18 @@ namespace SchoolAdmin_Project
 
         public string Name = "";
         public DateTime Birthdate = new DateTime(1900, 1, 1);
-        public uint StudentNmber = 0;
+        public uint StudentNumber = 0;
         private List<CourseResult> _coursesResults = [];
+
+
+        public Student(string name, DateTime birthDate)
+        {
+            Name = name;
+            Birthdate = birthDate;
+            StudentNumber = StudentCounter;
+            StudentCounter++;
+
+        }
 
         public List<CourseResult> CoursesResults
         {

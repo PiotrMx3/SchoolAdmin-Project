@@ -28,11 +28,12 @@
 
         public static void DemoCourses()
         {
-            Student said = new();
-            said.Name = "Said Aziz";
 
-            Student mieke = new();
-            mieke.Name = "Mieke Vermeulen";
+
+            Student said = new("Said Aziz", new DateTime(2000, 06, 1));
+
+            Student mieke = new("Mieke Vermeulen", new DateTime(1998, 1, 1));
+
 
             Course communicatie = new();
             communicatie.Title = "Communicatie";
@@ -73,12 +74,7 @@
 
         public static void DemoStudents()
         {
-            Student said = new();
-            said.Name = "Said Aziz";
-            said.Birthdate = new DateTime(2000, 06, 1);
-            said.StudentNmber = Student.StudentCounter;
-
-            Student.StudentCounter++;
+            Student said = new("Said Aziz", new DateTime(2000, 06, 1));
 
             said.RegisterCourseResult("Communicatie", 12);
             said.RegisterCourseResult("Programmeren", 15);
@@ -86,13 +82,9 @@
 
             said.ShowOverview();
 
+           
+            Student mieke = new("Mieke Vermeulen", new DateTime(1998, 1, 1));
 
-            Student mieke = new();
-            mieke.Name = "Mieke Vermeulen";
-            mieke.Birthdate = new DateTime(1998, 1, 1);
-            mieke.StudentNmber = Student.StudentCounter;
-
-            Student.StudentCounter++;
 
             mieke.RegisterCourseResult("Communicatie",13);
             mieke.RegisterCourseResult("Programmeren",16);
