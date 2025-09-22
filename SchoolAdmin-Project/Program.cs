@@ -84,11 +84,7 @@
             said.RegisterCourseResult("Programmeren", 15);
             said.RegisterCourseResult("Webtechnologie", 13);
 
-
-
-
-            Console.WriteLine(said.GenerateNameCard());
-            Console.WriteLine(said.DetermineWorkload());
+            said.ShowOverview();
 
 
             Student mieke = new();
@@ -103,10 +99,12 @@
             mieke.RegisterCourseResult("Databanken", 14);
 
 
-            Console.WriteLine(mieke.GenerateNameCard());
-            Console.WriteLine(mieke.DetermineWorkload());
-            
-            
+            mieke.ShowOverview();
+
+
+
+
+
         }
     }
 }

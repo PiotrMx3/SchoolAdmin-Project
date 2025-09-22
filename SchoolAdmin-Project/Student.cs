@@ -15,11 +15,38 @@ namespace SchoolAdmin_Project
         public uint StudentNmber = 0;
         private List<CourseResult> _coursesResults = [];
 
-
         public List<CourseResult> CoursesResults
         {
             get { return this._coursesResults; }
             private set { this._coursesResults = value; }
+        }
+
+        public void ShowOverview()
+        {
+            Console.WriteLine(this.Name);
+            Console.WriteLine($"Werkbelasting: {DetermineWorkload()}");
+            Console.WriteLine();
+            Console.WriteLine("Cijferrapport");
+            Console.WriteLine($"************");
+
+            foreach (var item in CoursesResults)
+            {
+                Console.WriteLine($"{item.Name + ":", -20}{item.Result:F2}");
+            }
+            Console.WriteLine($"{"Gemiddelde:", -20}{Average():F2}");
+            Console.WriteLine();
+        }
+
+        public double Average()
+        {
+            double result = 0.00;
+
+            foreach (var item in CoursesResults)
+            {
+                result += item.Result;
+            }
+
+            return result / CoursesResults.Count ;
         }
 
         public void RegisterCourseResult(string course, byte result)
