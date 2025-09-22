@@ -16,6 +16,8 @@ namespace SchoolAdmin_Project
         public static List<Course> AllCourses = new();
 
 
+
+
         public int Id
         {
             get { return this._id; }

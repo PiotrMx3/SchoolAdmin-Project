@@ -8,8 +8,34 @@ namespace SchoolAdmin_Project
 {
     internal class CourseResult
     {
-        public string Name;
-        public byte Result;
+        private string _name;
+        private byte _result;
+
+
+
+        public byte Result
+        {
+            get { return this._result; }
+            set
+            {
+                if (value > 20)
+                {
+                    Console.WriteLine("Warde moet tussen 0 en 20 liggen !");
+                    return;
+                }
+
+                this._result = value;
+            }
+        }
+
+        public string Name
+        {
+            get { return this._name; }
+            set
+            { 
+                this._name = value;
+            }
+        }
 
 
     }

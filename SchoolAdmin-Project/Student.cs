@@ -52,12 +52,6 @@ namespace SchoolAdmin_Project
         public void RegisterCourseResult(string course, byte result)
         {
 
-            if(result > 20)
-            {
-                Console.WriteLine("Warde moet tussen 0 en 20 liggen !");
-                return;
-            }
-
             CourseResult newCourseResult = new();
             newCourseResult.Name = course;
             newCourseResult.Result = result;
