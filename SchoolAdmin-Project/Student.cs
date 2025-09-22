@@ -13,18 +13,31 @@ namespace SchoolAdmin_Project
         public string Name = "";
         public DateTime Birthdate = new DateTime(1900, 1, 1);
         public uint StudentNmber = 0;
-        private List<string> _courses = [];
+        private List<CourseResult> _coursesResults = [];
 
 
-        public List<string> Courses
+        public List<CourseResult> CoursesResults
         {
-            get { return this._courses; }
-            private set { this._courses = value; }
+            get { return this._coursesResults; }
+            private set { this._coursesResults = value; }
         }
 
-        public void RegisterForCourse(string nameCourse)
+        public void RegisterCourseResult(string course, byte result)
         {
-            if (!Courses.Contains(nameCourse)) Courses.Add(nameCourse); 
+
+            if(result > 20)
+            {
+                Console.WriteLine("Warde moet tussen 0 en 20 liggen !");
+                return;
+            }
+
+            CourseResult newCourseResult = new();
+            newCourseResult.Name = course;
+            newCourseResult.Result = result;
+
+            CoursesResults.Add(newCourseResult);
+
+
 
         }
         public string GenerateNameCard()
@@ -35,7 +48,7 @@ namespace SchoolAdmin_Project
         public byte DetermineWorkload()
         {
 
-            return (byte)(this.Courses.Count * 10);
+            return (byte)(this.CoursesResults.Count * 10);
         }
 
     }

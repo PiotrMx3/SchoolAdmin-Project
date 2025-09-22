@@ -80,8 +80,11 @@
 
             Student.StudentCounter++;
 
-            said.RegisterForCourse("Programmeren");
-            said.RegisterForCourse("Databanken");
+            said.RegisterCourseResult("Communicatie", 12);
+            said.RegisterCourseResult("Programmeren", 15);
+            said.RegisterCourseResult("Webtechnologie", 13);
+
+
 
 
             Console.WriteLine(said.GenerateNameCard());
@@ -95,7 +98,10 @@
 
             Student.StudentCounter++;
 
-            mieke.RegisterForCourse("Communicatie");
+            mieke.RegisterCourseResult("Communicatie",13);
+            mieke.RegisterCourseResult("Programmeren",16);
+            mieke.RegisterCourseResult("Databanken", 14);
+
 
             Console.WriteLine(mieke.GenerateNameCard());
             Console.WriteLine(mieke.DetermineWorkload());
