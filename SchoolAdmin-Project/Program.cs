@@ -30,7 +30,9 @@
 
             Student.StudentCounter++;
 
-            said.Courses = new List<string>() { "Programmeren", "Databanken" };
+            said.RegisterForCourse("Programmeren");
+            said.RegisterForCourse("Databanken");
+
 
             Console.WriteLine(said.GenerateNameCard());
             Console.WriteLine(said.DetermineWorkload());
@@ -43,7 +45,8 @@
 
             Student.StudentCounter++;
 
-            mieke.Courses = new List<string>() { "Communicatie"};
+            mieke.RegisterForCourse("Communicatie");
+
             Console.WriteLine(mieke.GenerateNameCard());
             Console.WriteLine(mieke.DetermineWorkload());
             
