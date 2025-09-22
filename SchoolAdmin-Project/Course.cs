@@ -10,6 +10,23 @@ namespace SchoolAdmin_Project
     {
         public List<Student> Students = new();
         public string Title;
+        private int _id;
+        private byte _creditPoints;
+        public static int maxId = 1;
+        public static List<Course> AllCourses = new();
+
+
+        public int Id
+        {
+            get { return this._id; }
+        }
+
+        public byte CreditPoints
+        {
+            get { return this._creditPoints; }
+            private set { this._creditPoints = value; }
+        }
+
 
         public void ShowOverview()
         {
