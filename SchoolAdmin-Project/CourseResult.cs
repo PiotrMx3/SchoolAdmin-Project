@@ -12,7 +12,11 @@ namespace SchoolAdmin_Project
         private byte _result;
 
 
-
+        public CourseResult(string name, byte result)
+        {
+            this._name = name;
+            Result = result;
+        }
         public byte Result
         {
             get { return this._result; }
@@ -31,10 +35,7 @@ namespace SchoolAdmin_Project
         public string Name
         {
             get { return this._name; }
-            set
-            { 
-                this._name = value;
-            }
+
         }
 
 

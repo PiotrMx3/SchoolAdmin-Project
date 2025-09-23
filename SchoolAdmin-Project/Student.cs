@@ -78,9 +78,7 @@ namespace SchoolAdmin_Project
         public void RegisterCourseResult(string course, byte result)
         {
 
-            CourseResult newCourseResult = new();
-            newCourseResult.Name = course;
-            newCourseResult.Result = result;
+            CourseResult newCourseResult = new(course,result);
 
             CoursesResults.Add(newCourseResult);
 
