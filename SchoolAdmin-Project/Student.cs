@@ -20,6 +20,7 @@ namespace SchoolAdmin_Project
         {
             Name = name;
             Birthdate = birthDate;
+
             StudentNumber = StudentCounter;
             StudentCounter++;
 

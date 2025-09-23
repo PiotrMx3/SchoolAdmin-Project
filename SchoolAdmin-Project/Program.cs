@@ -34,28 +34,15 @@
 
             Student mieke = new("Mieke Vermeulen", new DateTime(1998, 1, 1));
 
+            List<Student> listStudents = new() { said, mieke };
 
-            Course communicatie = new();
-            communicatie.Title = "Communicatie";
+            Course communicatie = new("Communicatie",listStudents,6);
+            Course programmeren = new("Programmeren",listStudents);
 
-            Course programmeren = new();
-            programmeren.Title = "Programmeren";
-
-            Course webtechnologie = new();
-            webtechnologie.Title = "Webtechnologie";
-
-            Course databanken = new();
-            databanken.Title = "Databanken";
-
-            communicatie.Students.Add(said);
-            communicatie.Students.Add(mieke);
-
-
-            programmeren.Students.Add(said);
-            programmeren.Students.Add(mieke);
+            Course webtechnologie = new("Webtechnologie");
+            Course databanken = new("Databanken");
 
             webtechnologie.Students.Add(said);
-
             databanken.Students.Add(mieke);
 
             communicatie.ShowOverview();
@@ -66,8 +53,6 @@
             Console.WriteLine();
             databanken.ShowOverview();
             Console.WriteLine();
-
-
 
 
         }

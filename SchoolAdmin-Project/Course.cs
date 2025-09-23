@@ -16,7 +16,27 @@ namespace SchoolAdmin_Project
         public static List<Course> AllCourses = new();
 
 
+        public Course(string title) : this(title, new List<Student>(), 3)
+        {
 
+        }
+        public Course(string title, List<Student> students) :this(title, students, 3)
+        {
+
+        }
+
+        public Course(string title, List<Student> students, byte creditPoints)
+        {
+            this.Title = title;
+            this.Students.AddRange(students);
+            CreditPoints = creditPoints;
+            this._id = maxId;
+
+            AllCourses.Add(this);
+
+            maxId++;
+
+        }
 
         public int Id
         {
@@ -32,7 +52,7 @@ namespace SchoolAdmin_Project
 
         public void ShowOverview()
         {
-            Console.WriteLine($"{this.Title}");
+            Console.WriteLine($"{this.Title} ({Id}) ({CreditPoints}stp)");
 
             foreach (var item in Students)
             {
