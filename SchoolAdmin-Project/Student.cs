@@ -49,6 +49,7 @@ namespace SchoolAdmin_Project
         }
         public void ShowOverview()
         {
+            Console.WriteLine();
             Console.WriteLine($"{this.Name} ({Age})");
             Console.WriteLine($"Werkbelasting: {DetermineWorkload()}");
             Console.WriteLine();

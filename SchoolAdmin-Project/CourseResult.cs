@@ -16,6 +16,7 @@ namespace SchoolAdmin_Project
         {
             this._name = name;
             Result = result;
+
         }
         public byte Result
         {
