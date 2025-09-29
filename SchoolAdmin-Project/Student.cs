@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace SchoolAdmin_Project
         public string Name = "";
         public DateTime Birthdate = new DateTime(1900, 1, 1);
         public uint StudentNumber = 0;
-        private List<CourseResult> _coursesResults = [];
+        private List<CourseRegistration> _courseRegistration = [];
 
 
         public Student(string name, DateTime birthDate)
@@ -26,10 +27,10 @@ namespace SchoolAdmin_Project
 
         }
 
-        public List<CourseResult> CoursesResults
+        public List<CourseRegistration> CoursesResults
         {
-            get { return this._coursesResults; }
-            private set { this._coursesResults = value; }
+            get { return this._courseRegistration; }
+            private set { this._courseRegistration = value; }
         }
 
 
@@ -57,7 +58,14 @@ namespace SchoolAdmin_Project
 
             foreach (var item in CoursesResults)
             {
-                Console.WriteLine($"{item.Name + ":", -20}{item.Result:F2}");
+                if(item.Result is null )
+                {
+                    Console.WriteLine($"{item.Name + ":",-20}Geen Resultaat");
+                }
+                else
+                {
+                    Console.WriteLine($"{item.Name + ":",-20}{item.Result:F2}");
+                }
             }
             Console.WriteLine($"{"Gemiddelde:", -20}{Average():F2}");
             Console.WriteLine();
@@ -66,19 +74,25 @@ namespace SchoolAdmin_Project
         public double Average()
         {
             double result = 0.00;
+            int counter = 0;
 
             foreach (var item in CoursesResults)
-            {
-                result += item.Result;
+            {   
+                if (item.Result is not null)
+                {
+                    result += (byte)item.Result;
+                    counter++;
+                }
+                
             }
 
-            return result / CoursesResults.Count ;
+            return result / counter ;
         }
 
-        public void RegisterCourseResult(string course, byte result)
+        public void RegisterCourseResult(string course, byte? result)
         {
 
-            CourseResult newCourseResult = new(course,result);
+            CourseRegistration newCourseResult = new(course,result);
 
             CoursesResults.Add(newCourseResult);
 

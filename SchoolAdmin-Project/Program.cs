@@ -131,7 +131,7 @@
             Student said = new("Said Aziz", new DateTime(2000, 06, 1));
 
             said.RegisterCourseResult("Communicatie", 12);
-            said.RegisterCourseResult("Programmeren", 15);
+            said.RegisterCourseResult("Programmeren", null);
             said.RegisterCourseResult("Webtechnologie", 13);
 
             said.ShowOverview();
