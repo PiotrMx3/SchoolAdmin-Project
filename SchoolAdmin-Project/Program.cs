@@ -8,6 +8,8 @@
             Console.WriteLine("1: DemonstreerStudenten uitvoren.");
             Console.WriteLine("2: DemonstreerCursussen uitvoren.");
             Console.WriteLine("3: CSV inlezen uitvoren.");
+            Console.WriteLine("4: DemoStudyProgram uitvoeren.");
+
 
             string k = Console.ReadLine() ?? "";
 
@@ -22,11 +24,35 @@
                 case "3":
                     ReadTextFormatStudent();
                     break;
+                case "4":
+                    DemoStudyProgram();
+                    break;
                 default:
                     Console.WriteLine("Fout maak een nieuwe keuze !");
                     break;
             }
 
+        }
+
+
+        public static void DemoStudyProgram()
+        {
+            Course communicatie = new Course("Communicatie");
+            Course programmeren = new Course("Programmeren");
+            Course databanken = new Course("Databanken");
+
+            List<Course> courses = new List<Course>() { communicatie, programmeren, databanken };
+
+            StudyProgram programmerenProgram = new StudyProgram("Programmeren");
+            StudyProgram snbProgram = new StudyProgram("Systeem- en netwerkbeheer");
+
+            programmerenProgram.Courses.AddRange(courses);
+
+            snbProgram.Courses.AddRange(courses);
+
+            programmerenProgram.ShowOverview();
+
+            snbProgram.ShowOverview();
         }
 
 
@@ -102,10 +128,7 @@
 
             }
 
-
             newStudent.ShowOverview();
-
-
 
         }
 
