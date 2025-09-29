@@ -9,6 +9,8 @@
             Console.WriteLine("2: DemonstreerCursussen uitvoren.");
             Console.WriteLine("3: CSV inlezen uitvoren.");
             Console.WriteLine("4: DemoStudyProgram uitvoeren.");
+            Console.WriteLine("5: DemoStudyProgramTwo uitvoeren.");
+
 
 
             string k = Console.ReadLine() ?? "";
@@ -27,11 +29,40 @@
                 case "4":
                     DemoStudyProgram();
                     break;
+                case "5":
+                    DemoStudyTwo();
+                    break;
                 default:
                     Console.WriteLine("Fout maak een nieuwe keuze !");
                     break;
             }
 
+        }
+
+
+
+        public static void DemoStudyTwo()
+        {
+            Course communicatie = new Course("Communicatie");
+            Course programmeren = new Course("Programmeren");
+            Course databanken = new Course("Databanken");
+
+            List<Course> coursesProgrammeren = new List<Course>() { communicatie, programmeren, databanken };
+            List<Course> coursesSNB = new List<Course>() { communicatie, programmeren, databanken };
+
+            StudyProgram programmerenProgram = new StudyProgram("Programmeren");
+            StudyProgram snbProgram = new StudyProgram("Systeem- en netwerkbeheer");
+
+            programmerenProgram.Courses = [.. coursesProgrammeren];
+            snbProgram.Courses = [.. coursesSNB];
+
+            //we willen hieronder Databanken schrappen uit het programma SNB
+            snbProgram.Courses.Remove(databanken);
+
+            //voor SNB wordt de titel van de cursus Programmeren veranderd naar "Scripting"
+            snbProgram.Courses[1].Title = "Scripting";
+            programmerenProgram.ShowOverview();
+            snbProgram.ShowOverview();
         }
 
 
@@ -46,9 +77,12 @@
             StudyProgram programmerenProgram = new StudyProgram("Programmeren");
             StudyProgram snbProgram = new StudyProgram("Systeem- en netwerkbeheer");
 
-            programmerenProgram.Courses.AddRange(courses);
+            programmerenProgram.Courses = [.. courses];
 
-            snbProgram.Courses.AddRange(courses);
+            snbProgram.Courses = [..courses];
+
+            snbProgram.Courses.Remove(databanken);
+            snbProgram.Courses.Add(programmeren);
 
             programmerenProgram.ShowOverview();
 

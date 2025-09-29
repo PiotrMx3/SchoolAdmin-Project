@@ -10,7 +10,7 @@ namespace SchoolAdmin_Project
     {
 		private string _name;
 
-		private List<Course> _courses = new();
+		private List<Course> _courses;
 
         public void ShowOverview()
         {
@@ -32,7 +32,7 @@ namespace SchoolAdmin_Project
 		public List<Course> Courses
 		{
 			get { return _courses; }
-			private set { _courses = value; }
+			set { _courses = value; }
 		}
 
 		public string Name
