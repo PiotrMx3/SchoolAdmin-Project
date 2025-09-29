@@ -55,12 +55,12 @@
             // 04;                1
             // 03;                2   
             // 1998;              3
-            // Boekhouden;        4 0
-            // 14;                5 1
-            // Macro-economie;    6 2
-            // 8;                 7 3
-            // Frans, deel 2;     8 4
-            // 18                 9 5
+            // Boekhouden;        4
+            // 14;                5
+            // Macro-economie;    6
+            // 8;                 7
+            // Frans, deel 2;     8
+            // 18                 9
 
             string name = dataStudent[0];
             string birthDay = dataStudent[1];
@@ -72,6 +72,13 @@
 
 
             string[] dataCourses = dataStudent.Skip(4).ToArray();
+
+            // Boekhouden;        0
+            // 14;                1
+            // Macro-economie;    2
+            // 8;                 3
+            // Frans, deel 2;     4
+            // 18                 5
 
 
             for (int i = 0; i < dataCourses.Length; i += 2)
@@ -139,8 +146,6 @@
 
 
             mieke.ShowOverview();
-
-
 
 
 

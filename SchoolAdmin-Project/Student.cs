@@ -43,7 +43,6 @@ namespace SchoolAdmin_Project
 
                 if (Birthdate.Date > now.AddYears(-age)) age--;
 
-
                 return age;
             }
         }
