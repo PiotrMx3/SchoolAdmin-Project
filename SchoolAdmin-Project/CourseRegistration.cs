@@ -8,13 +8,13 @@ namespace SchoolAdmin_Project
 {
     internal class CourseRegistration
     {
-        private string _name;
+        private Course _course;
         private byte? _result;
 
 
-        public CourseRegistration(string name, byte? result)
+        public CourseRegistration(Course course, byte? result)
         {
-            this._name = name;
+            this._course = course ;
             Result = result;
 
         }
@@ -23,19 +23,18 @@ namespace SchoolAdmin_Project
             get { return this._result; }
             set
             {
-                if (value is null || value > 20)
+                if (!(value is null) && !(value > 20))
                 {
-                    Console.WriteLine("Warde moet tussen 0 en 20 liggen !");
-                    return;
+                    this._result = value;
                 }
 
-                this._result = value;
             }
         }
 
-        public string Name
+        public Course Course
         {
-            get { return this._name; }
+            get { return this._course; }
+            set { this._course = value; }
 
         }
 

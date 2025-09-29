@@ -32,6 +32,12 @@
 
         public static void ReadTextFormatStudent()
         {
+
+            Course comunication = new Course("Communicatie");
+            Course programing = new Course("Programmeren");
+            Course webtechologies = new Course("Webtechnologie");
+            Course databases = new Course("Databanken");
+
             Console.WriteLine("Geef de tekstvoorstelling van 1 student in CSV-formaat:");
             string newCsv = Console.ReadLine() ?? "";
 
@@ -81,13 +87,21 @@
             // 18                 5
 
 
+
             for (int i = 0; i < dataCourses.Length; i += 2)
             {
-                string courseName = dataCourses[i];
-                byte courseResult = Convert.ToByte(dataCourses[i + 1]);
+                Course? course = Course.SearchCourseById(Convert.ToInt32(dataCourses[i]));
 
-                newStudent.RegisterCourseResult(courseName,courseResult);
+                if (course is not null)
+                {
+
+                    byte courseResult = Convert.ToByte(dataCourses[i + 1]);
+
+                    newStudent.RegisterCourseResult(course, courseResult);
+                }
+
             }
+
 
             newStudent.ShowOverview();
 
@@ -114,6 +128,18 @@
             webtechnologie.Students.Add(said);
             databanken.Students.Add(mieke);
 
+
+            said.RegisterCourseResult(communicatie, 12);
+            said.RegisterCourseResult(programmeren, null);
+            said.RegisterCourseResult(webtechnologie, 13);
+
+            mieke.RegisterCourseResult(communicatie, 13);
+            mieke.RegisterCourseResult(programmeren, 16);
+            mieke.RegisterCourseResult(databanken, 14);
+
+
+
+
             communicatie.ShowOverview();
             Console.WriteLine();
             programmeren.ShowOverview();
@@ -130,9 +156,16 @@
         {
             Student said = new("Said Aziz", new DateTime(2000, 06, 1));
 
-            said.RegisterCourseResult("Communicatie", 12);
-            said.RegisterCourseResult("Programmeren", null);
-            said.RegisterCourseResult("Webtechnologie", 13);
+            Course comunication = new Course("Communicatie");
+            Course programing = new Course("Programmeren");
+            Course webtechologies = new Course("Webtechnologie");
+            Course databases = new Course("Databanken");
+
+
+
+            said.RegisterCourseResult(comunication, 12);
+            said.RegisterCourseResult(programing, null);
+            said.RegisterCourseResult(webtechologies, 13);
 
             said.ShowOverview();
 
@@ -140,9 +173,9 @@
             Student mieke = new("Mieke Vermeulen", new DateTime(1998, 1, 1));
 
 
-            mieke.RegisterCourseResult("Communicatie",13);
-            mieke.RegisterCourseResult("Programmeren",16);
-            mieke.RegisterCourseResult("Databanken", 14);
+            mieke.RegisterCourseResult(comunication,13);
+            mieke.RegisterCourseResult(programing,16);
+            mieke.RegisterCourseResult(databases, 14);
 
 
             mieke.ShowOverview();

@@ -38,9 +38,16 @@ namespace SchoolAdmin_Project
 
         }
 
+
+        public static Course? SearchCourseById(int id)
+        {
+            return AllCourses.Find(el => el.Id == id);
+        }
+
         public int Id
         {
             get { return this._id; }
+
         }
 
         public byte CreditPoints

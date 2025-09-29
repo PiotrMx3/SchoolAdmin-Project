@@ -60,11 +60,11 @@ namespace SchoolAdmin_Project
             {
                 if(item.Result is null )
                 {
-                    Console.WriteLine($"{item.Name + ":",-20}Geen Resultaat");
+                    Console.WriteLine($"{item.Course.Title + ":",-20}Geen Resultaat");
                 }
                 else
                 {
-                    Console.WriteLine($"{item.Name + ":",-20}{item.Result:F2}");
+                    Console.WriteLine($"{item.Course.Title + ":",-20}{item.Result:F2}");
                 }
             }
             Console.WriteLine($"{"Gemiddelde:", -20}{Average():F2}");
@@ -89,7 +89,7 @@ namespace SchoolAdmin_Project
             return result / counter ;
         }
 
-        public void RegisterCourseResult(string course, byte? result)
+        public void RegisterCourseResult(Course course, byte? result)
         {
 
             CourseRegistration newCourseResult = new(course,result);
