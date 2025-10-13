@@ -8,29 +8,29 @@ using System.Threading.Tasks;
 
 namespace SchoolAdmin_Project
 {
-    internal class Student
+    internal class Student : Person
     {
-        public static uint StudentCounter = 1;
 
-        public string Name = "";
-        public DateTime Birthdate = new DateTime(1900, 1, 1);
         public uint StudentNumber = 0;
         private List<CourseRegistration> _courseRegistration = [];
         private static List<Student> _allStudents = new List<Student>();
+        private Dictionary<DateTime,string> _studenFile = new Dictionary<DateTime, string>();
 
-
-        public Student(string name, DateTime birthDate)
+        public ImmutableDictionary<DateTime,string> StudentFile
         {
-            Name = name;
-            Birthdate = birthDate;
+            get { return _studenFile.ToImmutableDictionary<DateTime,string>(); }
 
-            StudentNumber = StudentCounter;
-            StudentCounter++;
+        }
+
+        public void AddStudentFileEntry(string note)
+        {
+            _studenFile.Add(DateTime.Now, note);
+        }
 
 
-
+        public Student(string name, DateTime birthDate) : base(name, birthDate)
+        {
             _allStudents.Add(this);
-
         }
 
         public static ImmutableList<Student> AllStudents
@@ -46,19 +46,6 @@ namespace SchoolAdmin_Project
         }
 
 
-        public int Age
-        {
-            get 
-            {
-
-                DateTime now = DateTime.Now;
-                int age = now.Year - Birthdate.Year;
-
-                if (Birthdate.Date > now.AddYears(-age)) age--;
-
-                return age;
-            }
-        }
         public void ShowOverview()
         {
             Console.WriteLine();
@@ -109,16 +96,15 @@ namespace SchoolAdmin_Project
             CoursesResults.Add(newCourseResult);
 
         }
-        public string GenerateNameCard()
+
+        public override string GenerateNameCard()
         {
             return this.Name + " (Student)";
         }
 
-        public byte DetermineWorkload()
+        public override double DetermineWorkload()
         {
-
-            return (byte)(this.CoursesResults.Count * 10);
+            return this.CoursesResults.Count * 10;
         }
-
     }
 }

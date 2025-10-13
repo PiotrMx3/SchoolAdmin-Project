@@ -12,7 +12,6 @@ namespace SchoolAdmin_Project
 		private uint _id;
 		private string _name;
 		private DateTime _birthDate;
-		private int _age;
 		private static uint maxId = 1;
 		public abstract string GenerateNameCard();
 		public abstract double DetermineWorkload();
@@ -24,6 +23,7 @@ namespace SchoolAdmin_Project
 			this._name = name;
 			this._birthDate = birthDate;
 			this._id = maxId;
+
 			_allPersons.Add(this);
 
 			maxId++;
