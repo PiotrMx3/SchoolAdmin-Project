@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace SchoolAdmin_Project
         public DateTime Birthdate = new DateTime(1900, 1, 1);
         public uint StudentNumber = 0;
         private List<CourseRegistration> _courseRegistration = [];
+        private static List<Student> _allStudents = new List<Student>();
 
 
         public Student(string name, DateTime birthDate)
@@ -25,7 +27,17 @@ namespace SchoolAdmin_Project
             StudentNumber = StudentCounter;
             StudentCounter++;
 
+
+
+            _allStudents.Add(this);
+
         }
+
+        public static ImmutableList<Student> AllStudents
+        {
+            get { return _allStudents.ToImmutableList<Student>(); }
+        }
+
 
         public List<CourseRegistration> CoursesResults
         {

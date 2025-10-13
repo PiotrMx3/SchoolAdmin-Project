@@ -43,6 +43,10 @@
 
         public static void DemoStudyTwo()
         {
+
+            // TODO: Aanpasen wijzigingen
+
+
             Course communicatie = new Course("Communicatie");
             Course programmeren = new Course("Programmeren");
             Course databanken = new Course("Databanken");
@@ -53,8 +57,8 @@
             StudyProgram programmerenProgram = new StudyProgram("Programmeren");
             StudyProgram snbProgram = new StudyProgram("Systeem- en netwerkbeheer");
 
-            programmerenProgram.Courses = [.. coursesProgrammeren];
-            snbProgram.Courses = [.. coursesSNB];
+            programmerenProgram.AddCourse(coursesProgrammeren);
+            snbProgram.AddCourse(coursesSNB);
 
             //we willen hieronder Databanken schrappen uit het programma SNB
             snbProgram.Courses.Remove(databanken);
@@ -77,9 +81,11 @@
             StudyProgram programmerenProgram = new StudyProgram("Programmeren");
             StudyProgram snbProgram = new StudyProgram("Systeem- en netwerkbeheer");
 
-            programmerenProgram.Courses = [.. courses];
+           
+            programmerenProgram.AddCourse(courses);
 
-            snbProgram.Courses = [..courses];
+            snbProgram.AddCourse(courses);
+
 
             snbProgram.Courses.Remove(databanken);
             snbProgram.Courses.Add(programmeren);
@@ -152,6 +158,7 @@
             {
                 Course? course = Course.SearchCourseById(Convert.ToInt32(dataCourses[i]));
 
+
                 if (course is not null)
                 {
 
@@ -161,6 +168,8 @@
                 }
 
             }
+
+
 
             newStudent.ShowOverview();
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace SchoolAdmin_Project
     {
 		private string _name;
 
-		private List<Course> _courses;
+		private List<Course> _courses = new List<Course>();
 
         public void ShowOverview()
         {
@@ -24,15 +25,23 @@ namespace SchoolAdmin_Project
 			Console.WriteLine();
         }
 
+		public void AddCourse(Course course)
+		{
+            _courses.Add(course);
+        }
+
+        public void AddCourse(List<Course> listCourse)
+        {
+            _courses.AddRange(listCourse);
+        }
         public StudyProgram(string name)
 		{
 			_name = name;
 		}
 
-		public List<Course> Courses
+		public ImmutableList<Course> Courses
 		{
-			get { return _courses; }
-			set { _courses = value; }
+			get { return _courses.ToImmutableList<Course>(); }
 		}
 
 		public string Name

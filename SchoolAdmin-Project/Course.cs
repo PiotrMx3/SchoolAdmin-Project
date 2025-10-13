@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,8 @@ namespace SchoolAdmin_Project
         private int _id;
         private byte _creditPoints;
         public static int maxId = 1;
-        public static List<Course> AllCourses = new();
+        private static List<Course> _allCourses = new();
+
 
 
         public Course(string title) : this(title, new List<Student>(), 3)
@@ -32,15 +34,22 @@ namespace SchoolAdmin_Project
             CreditPoints = creditPoints;
             this._id = maxId;
 
-            AllCourses.Add(this);
+            _allCourses.Add(this);
 
             maxId++;
 
         }
 
 
+        public static ImmutableList<Course> AllCourses
+        {
+            get { return _allCourses.ToImmutableList<Course>(); }
+        }
+
+
         public static Course? SearchCourseById(int id)
         {
+
             return AllCourses.Find(el => el.Id == id);
         }
 
