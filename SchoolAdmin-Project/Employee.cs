@@ -25,7 +25,7 @@ namespace SchoolAdmin_Project
             _tasks = tasks;
            
         }
-
+        
         public void AddOrUpdatetask(string task, byte hours)
         {   
             if(_tasks.ContainsKey(task))
@@ -37,7 +37,7 @@ namespace SchoolAdmin_Project
                 _tasks.Add(task, hours);
             }
         }
-
+        // perosnoleee 
         public byte Seniority
         {
             get  { return _seniority; }
