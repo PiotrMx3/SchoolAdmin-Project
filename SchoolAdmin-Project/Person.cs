@@ -50,7 +50,6 @@ namespace SchoolAdmin_Project
 
 		}
 
-
 		public DateTime Birthdate
 		{
 			get { return this._birthDate; }

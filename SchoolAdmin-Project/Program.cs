@@ -10,6 +10,8 @@
             Console.WriteLine("3: CSV inlezen uitvoren.");
             Console.WriteLine("4: DemoStudyProgram uitvoeren.");
             Console.WriteLine("5: DemoStudyProgramTwo uitvoeren.");
+            Console.WriteLine("6: DemoAdministrativePersonnel uitvoeren.");
+            Console.WriteLine("7: DemoLectures uitvoeren.");
 
 
 
@@ -32,6 +34,12 @@
                 case "5":
                     DemoStudyTwo();
                     break;
+                case "6":
+                    DemoAdministrativePersonnel();
+                    break;
+                case "7":
+                    DemoLectures();
+                    break;
                 default:
                     Console.WriteLine("Fout maak een nieuwe keuze !");
                     break;
@@ -40,6 +48,37 @@
         }
 
 
+        public static void DemoLectures()
+        {
+            Course course1 = new Course("Economie");
+            Course course2 = new Course("Statistiek");
+            Course course3 = new Course("Analytische meetkunde");
+
+            Lector anna = new Lector("Anna", new DateTime(1990,02,01), new Dictionary<Course, byte> { { course1, 3 }, {course2, 3 }, {course3, 4 } });
+            anna.Seniority = 9;
+
+            foreach (var item in Lector.AllLectors)
+            {
+                Console.WriteLine($"{item.GenerateNameCard()}");
+                Console.WriteLine($"Solaris: {item.CalculateSalary()} euro");
+                Console.WriteLine($"Werkbelasting: {item.DetermineWorkload()} h");
+
+            }
+        }
+
+        public static void DemoAdministrativePersonnel()
+        {
+            AdministrativePersonnel ahmed = new AdministrativePersonnel("Ahmed Azzaoui", new DateTime(1988,02,04), new Dictionary<string, byte> { {"Roostering", 10 }, {"Correspondentie", 10 }, {"Animatie", 10 } });
+            ahmed.Seniority = 7;
+
+            foreach (var item in AdministrativePersonnel.AdministrativeStaff)
+            {
+                Console.WriteLine($"{item.GenerateNameCard()}");
+                Console.WriteLine($"Solaris: {item.CalculateSalary()} euro");
+                Console.WriteLine($"Werkbelasting: {item.DetermineWorkload()} h");
+
+            }
+        }
 
         public static void DemoStudyTwo()
         {

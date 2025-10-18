@@ -14,33 +14,34 @@ namespace SchoolAdmin_Project
 
         private Dictionary<string, byte> _tasks = new();
 
+        protected Employee(string name, DateTime birthDate, Dictionary<string,byte> tasks) : base(name, birthDate)
+        {
+            this._tasks = tasks;
+            _allEmployees.Add(this);
+           
+        }
         public ImmutableDictionary<string,byte> Tasks
         {
             get { return _tasks.ToImmutableDictionary(); }
   
         }
 
-        protected Employee(string name, DateTime birthDate, Dictionary<string,byte> tasks) : base(name, birthDate)
-        {
-            _tasks = tasks;
-           
-        }
         
         public void AddOrUpdatetask(string task, byte hours)
         {   
-            if(_tasks.ContainsKey(task))
+            if(this._tasks.ContainsKey(task))
             {
-                _tasks[task] = hours;
+                this._tasks[task] = hours;
             }
             else
             {
-                _tasks.Add(task, hours);
+                this._tasks.Add(task, hours);
             }
         }
-        // perosnoleee 
+
         public byte Seniority
         {
-            get  { return _seniority; }
+            get  { return this._seniority; }
             set 
             {
                 if (value > 50)
@@ -57,7 +58,6 @@ namespace SchoolAdmin_Project
         }
 
         public abstract uint CalculateSalary();
-
 
         public static ImmutableList<Employee> AllEmployees
         {
