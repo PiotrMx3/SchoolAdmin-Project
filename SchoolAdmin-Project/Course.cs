@@ -16,7 +16,17 @@ namespace SchoolAdmin_Project
         public static int maxId = 1;
         private static List<Course> _allCourses = new();
 
+        public override bool Equals(object? obj)
+        {
+            if (obj is not Course other) return false;
 
+            return this.Id == other.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
 
         public Course(string title) : this(title, new List<Student>(), 3)
         {

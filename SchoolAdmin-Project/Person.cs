@@ -29,6 +29,20 @@ namespace SchoolAdmin_Project
 			maxId++;
 		}
 
+
+        public override bool Equals(object? obj)
+        {
+			if (obj is not Person other) return false;
+
+			return this.Id == other.Id;
+
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+
 		public static ImmutableList<Person> AllPersons
 		{
 			get { return _allPersons.ToImmutableList<Person>() ; }
