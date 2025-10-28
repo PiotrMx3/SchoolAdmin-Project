@@ -78,6 +78,7 @@
                 Console.WriteLine($"Werkbelasting: {item.DetermineWorkload()} h");
 
             }
+
         }
 
         public static void DemoStudyTwo()

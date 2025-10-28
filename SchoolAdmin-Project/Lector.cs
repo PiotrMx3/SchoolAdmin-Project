@@ -18,6 +18,14 @@ namespace SchoolAdmin_Project
         }
 
 
+        public override string ToString()
+        {
+            return $"{base.ToString()}\n" +
+                $"Lector";
+
+        }
+
+
         public void AddCourseToLector(Course course, byte hours)
         {
             if (this._lectorTasks.ContainsKey(course))

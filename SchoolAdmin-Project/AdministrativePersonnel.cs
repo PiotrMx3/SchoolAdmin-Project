@@ -22,6 +22,13 @@ namespace SchoolAdmin_Project
             _allAdministrativeStaff.Add(this);
         }
 
+        public override string ToString()
+        {
+            return $"{base.ToString()}\n" +
+                $"Administratief personeel";
+
+        }
+
         public override uint CalculateSalary()
         {   
             uint salary = 2000;

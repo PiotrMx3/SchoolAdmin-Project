@@ -22,6 +22,15 @@ namespace SchoolAdmin_Project
 
         }
 
+
+        public override string ToString()
+        {
+            return $"{base.ToString()}\n" +
+                $"Student";
+
+        }
+
+
         public void AddStudentFileEntry(string note)
         {
             _studenFile.Add(DateTime.Now, note);

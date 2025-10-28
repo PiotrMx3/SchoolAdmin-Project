@@ -29,7 +29,13 @@ namespace SchoolAdmin_Project
 			maxId++;
 		}
 
-
+        public override string ToString()
+        {
+			return $"Person\n" +
+				$"------\n" +
+				$"Naam: {Name}\n" +
+				$"Leeftijd: {Age}";
+        }
         public override bool Equals(object? obj)
         {
 			if (obj is not Person other) return false;
