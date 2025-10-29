@@ -9,12 +9,25 @@ namespace SchoolAdmin_Project
 {
     internal class Lector : Employee
     {
-        private static List<Lector> _allLectors = new();
         private Dictionary<Course, byte> _lectorTasks;
         public Lector(string name, DateTime birthDate, Dictionary<Course,byte> courses) : base(name, birthDate, new Dictionary<string,byte>())
         {
-            _allLectors.Add(this);
             _lectorTasks = courses;
+        }
+
+        public static ImmutableList<Lector> AllLectors
+        {
+            get
+            {
+                var allLector = ImmutableList.CreateBuilder<Lector>();
+
+                foreach (Person lector in Person.AllPersons)
+                {
+                    if (lector is Lector l) allLector.Add(l);
+                }
+
+                return allLector.ToImmutableList();
+            }
         }
 
 
@@ -41,11 +54,6 @@ namespace SchoolAdmin_Project
         public ImmutableDictionary<Course,byte> LectorTasks
         {
             get { return this._lectorTasks.ToImmutableDictionary(); }
-        }
-
-        public static ImmutableList<Lector> AllLectors
-        {
-            get { return _allLectors.ToImmutableList(); }
         }
 
 

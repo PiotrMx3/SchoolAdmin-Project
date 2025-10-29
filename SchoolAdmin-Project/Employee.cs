@@ -9,7 +9,6 @@ namespace SchoolAdmin_Project
 {
     internal abstract class Employee : Person
     {
-        private static List<Employee> _allEmployees = new();
         private byte _seniority;
 
         private Dictionary<string, byte> _tasks = new();
@@ -17,7 +16,6 @@ namespace SchoolAdmin_Project
         protected Employee(string name, DateTime birthDate, Dictionary<string,byte> tasks) : base(name, birthDate)
         {
             this._tasks = tasks;
-            _allEmployees.Add(this);
            
         }
         public ImmutableDictionary<string,byte> Tasks
@@ -61,7 +59,17 @@ namespace SchoolAdmin_Project
 
         public static ImmutableList<Employee> AllEmployees
         {
-            get { return _allEmployees.ToImmutableList(); }
+            get
+            {
+                var allEmployees = ImmutableList.CreateBuilder<Employee>();
+
+                foreach (Person employee in Person.AllPersons)
+                {
+                    if (employee is Employee e) allEmployees.Add(e);
+                }
+
+                return allEmployees.ToImmutableList(); ;
+            }
         }
 
     }

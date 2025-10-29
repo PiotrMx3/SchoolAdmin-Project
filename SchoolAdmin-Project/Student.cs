@@ -13,20 +13,22 @@ namespace SchoolAdmin_Project
 
         public uint StudentNumber = 0;
         private List<CourseRegistration> _courseRegistration = [];
-        private static List<Student> _allStudents = new List<Student>();
         private Dictionary<DateTime,string> _studenFile = new Dictionary<DateTime, string>();
 
-        public ImmutableDictionary<DateTime,string> StudentFile
+        public Student(string name, DateTime birthDate) : base(name, birthDate)
         {
-            get { return _studenFile.ToImmutableDictionary<DateTime,string>(); }
-
+    
         }
-
 
         public override string ToString()
         {
             return $"{base.ToString()}\n" +
                 $"Student";
+        }
+
+        public ImmutableDictionary<DateTime,string> StudentFile
+        {
+            get { return _studenFile.ToImmutableDictionary<DateTime,string>(); }
 
         }
 
@@ -37,14 +39,23 @@ namespace SchoolAdmin_Project
         }
 
 
-        public Student(string name, DateTime birthDate) : base(name, birthDate)
-        {
-            _allStudents.Add(this);
-        }
 
         public static ImmutableList<Student> AllStudents
         {
-            get { return _allStudents.ToImmutableList<Student>(); }
+            get
+            {
+                var allStudentsBuilder = ImmutableList.CreateBuilder<Student>();
+
+                foreach (Person student in Person.AllPersons)
+                {
+                    if(student is Student s)
+                    {
+                        allStudentsBuilder.Add(s);
+                    }
+                }
+
+                return allStudentsBuilder.ToImmutableList();
+            }
         }
 
 

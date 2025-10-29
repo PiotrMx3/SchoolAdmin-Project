@@ -10,16 +10,24 @@ namespace SchoolAdmin_Project
 {
     internal class AdministrativePersonnel : Employee
     {
-        private static List<AdministrativePersonnel> _allAdministrativeStaff = new();
 
         public static ImmutableList<AdministrativePersonnel> AdministrativeStaff
         {
-            get { return _allAdministrativeStaff.ToImmutableList(); }
+            get
+            {
+                var allAdminStaff = ImmutableList.CreateBuilder<AdministrativePersonnel>();
+
+                foreach (Person admin in Person.AllPersons)
+                {
+                    if (admin is AdministrativePersonnel a) allAdminStaff.Add(a);
+                }
+
+                return allAdminStaff.ToImmutableList() ;
+            }
         }
 
         public AdministrativePersonnel(string name, DateTime birthDate, Dictionary<string, byte> tasks) : base(name, birthDate, tasks)
         {
-            _allAdministrativeStaff.Add(this);
         }
 
         public override string ToString()

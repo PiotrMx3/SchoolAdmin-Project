@@ -285,9 +285,6 @@
 
 
             mieke.ShowOverview();
-
-
-
         }
     }
 }
