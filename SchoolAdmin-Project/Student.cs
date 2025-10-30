@@ -12,7 +12,6 @@ namespace SchoolAdmin_Project
     {
 
         private Dictionary<DateTime,string> _studenFile = new Dictionary<DateTime, string>();
-        private ImmutableList<Course> _courses;
 
         public ImmutableList<Course> Courses
         {
@@ -28,7 +27,6 @@ namespace SchoolAdmin_Project
                 return allCoursesByStudent.ToImmutableList();
             }
 
-            private set { _courses = value; }
         }
 
         public Student(string name, DateTime birthDate) : base(name, birthDate)

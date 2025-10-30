@@ -19,7 +19,7 @@ namespace SchoolAdmin_Project
         {
             Course = course;
             Result = result;
-            Student = student;
+            this._student = student;
 
             _allCourseRegistrations.Add(this);
         }
@@ -27,7 +27,7 @@ namespace SchoolAdmin_Project
         public Student Student
         {
             get { return this._student; }
-            private set { this._student = value; }
+ 
         }
 
 

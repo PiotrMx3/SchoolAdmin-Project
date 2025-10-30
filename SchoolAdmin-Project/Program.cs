@@ -9,9 +9,8 @@
             Console.WriteLine("2: DemonstreerCursussen uitvoren.");
             Console.WriteLine("3: CSV inlezen uitvoren.");
             Console.WriteLine("4: DemoStudyProgram uitvoeren.");
-            Console.WriteLine("5: DemoStudyProgramTwo uitvoeren.");
-            Console.WriteLine("6: DemoAdministrativePersonnel uitvoeren.");
-            Console.WriteLine("7: DemoLectures uitvoeren.");
+            Console.WriteLine("5: DemoAdministrativePersonnel uitvoeren.");
+            Console.WriteLine("6: DemoLectures uitvoeren.");
 
 
 
@@ -32,12 +31,9 @@
                     DemoStudyProgram();
                     break;
                 case "5":
-                    DemoStudyTwo();
-                    break;
-                case "6":
                     DemoAdministrativePersonnel();
                     break;
-                case "7":
+                case "6":
                     DemoLectures();
                     break;
                 default:
@@ -81,7 +77,7 @@
 
         }
 
-        public static void DemoStudyTwo()
+        public static void DemoStudyProgram()
         {
 
             // TODO: Aanpasen wijzigingen
@@ -91,50 +87,27 @@
             Course programmeren = new Course("Programmeren");
             Course databanken = new Course("Databanken");
 
-            List<Course> coursesProgrammeren = new List<Course>() { communicatie, programmeren, databanken };
-            List<Course> coursesSNB = new List<Course>() { communicatie, programmeren, databanken };
 
             StudyProgram programmerenProgram = new StudyProgram("Programmeren");
             StudyProgram snbProgram = new StudyProgram("Systeem- en netwerkbeheer");
 
-            programmerenProgram.AddCourse(coursesProgrammeren);
-            snbProgram.AddCourse(coursesSNB);
+            programmerenProgram.AddCourse(new Course(communicatie), 1);
+            programmerenProgram.AddCourse(new Course(programmeren), 1);
+            programmerenProgram.AddCourse(new Course(databanken), 1);
+
+
+            snbProgram.AddCourse(new Course(communicatie), 1);
+            snbProgram.AddCourse(new Course(programmeren), 1);
+            snbProgram.AddCourse(new Course(databanken), 1);
 
             //we willen hieronder Databanken schrappen uit het programma SNB
-            snbProgram.Courses.Remove(databanken);
+            snbProgram.RemoveCourse(databanken);
 
             //voor SNB wordt de titel van de cursus Programmeren veranderd naar "Scripting"
-            snbProgram.Courses[1].Title = "Scripting";
+            snbProgram.ChangeCourseTitle(programmeren, "Scripting");
             programmerenProgram.ShowOverview();
             snbProgram.ShowOverview();
         }
-
-
-        public static void DemoStudyProgram()
-        {
-            Course communicatie = new Course("Communicatie");
-            Course programmeren = new Course("Programmeren");
-            Course databanken = new Course("Databanken");
-
-            List<Course> courses = new List<Course>() { communicatie, programmeren, databanken };
-
-            StudyProgram programmerenProgram = new StudyProgram("Programmeren");
-            StudyProgram snbProgram = new StudyProgram("Systeem- en netwerkbeheer");
-
-           
-            programmerenProgram.AddCourse(courses);
-
-            snbProgram.AddCourse(courses);
-
-
-            snbProgram.Courses.Remove(databanken);
-            snbProgram.Courses.Add(programmeren);
-
-            programmerenProgram.ShowOverview();
-
-            snbProgram.ShowOverview();
-        }
-
 
         public static void ReadTextFormatStudent()
         {
