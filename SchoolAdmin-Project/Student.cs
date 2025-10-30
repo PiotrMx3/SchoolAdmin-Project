@@ -11,13 +11,44 @@ namespace SchoolAdmin_Project
     internal class Student : Person
     {
 
-        public uint StudentNumber = 0;
-        private List<CourseRegistration> _courseRegistration = [];
         private Dictionary<DateTime,string> _studenFile = new Dictionary<DateTime, string>();
+        private ImmutableList<Course> _courses;
+
+        public ImmutableList<Course> Courses
+        {
+            get
+            {
+                var allCoursesByStudent = ImmutableList.CreateBuilder<Course>();
+
+                foreach (var item in CourseRegistrations)
+                {
+                    allCoursesByStudent.Add(item.Course);
+                }
+
+                return allCoursesByStudent.ToImmutableList();
+            }
+
+            private set { _courses = value; }
+        }
 
         public Student(string name, DateTime birthDate) : base(name, birthDate)
         {
     
+        }
+
+        public ImmutableList<CourseRegistration> CourseRegistrations
+        {
+            get
+            {
+                var allCourseRegistrationsByStudent = ImmutableList.CreateBuilder<CourseRegistration>();
+
+                foreach (var item in CourseRegistration.AllCourseRegistrations)
+                {
+                    if (this.Equals(item.Student)) allCourseRegistrationsByStudent.Add(item);
+                }
+
+                return allCourseRegistrationsByStudent.ToImmutableList();
+            }
         }
 
         public override string ToString()
@@ -59,17 +90,19 @@ namespace SchoolAdmin_Project
         }
 
 
-        public List<CourseRegistration> CoursesResults
+        public ImmutableList<CourseRegistration> CoursesResults
         {
-            get { return this._courseRegistration; }
-            private set { this._courseRegistration = value; }
+            get
+            {
+                return CourseRegistrations; 
+            }
         }
 
 
         public void ShowOverview()
         {
             Console.WriteLine();
-            Console.WriteLine($"{this.Name} ({Age})");
+            Console.WriteLine($"{Name} ({Age})");
             Console.WriteLine($"Werkbelasting: {DetermineWorkload()}");
             Console.WriteLine();
             Console.WriteLine("Cijferrapport");
@@ -111,9 +144,7 @@ namespace SchoolAdmin_Project
         public void RegisterCourseResult(Course course, byte? result)
         {
 
-            CourseRegistration newCourseResult = new(course,result);
-
-            CoursesResults.Add(newCourseResult);
+            CourseRegistration newCourseResult = new(course, result, this);
 
         }
 

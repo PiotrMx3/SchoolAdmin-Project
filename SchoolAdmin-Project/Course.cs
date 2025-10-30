@@ -9,12 +9,56 @@ namespace SchoolAdmin_Project
 {
     internal class Course
     {
-        public List<Student> Students = new();
         public string Title;
         private int _id;
         private byte _creditPoints;
         public static int maxId = 1;
         private static List<Course> _allCourses = new();
+
+        public Course(string title, byte creditPoints)
+        {
+            this.Title = title;
+            CreditPoints = creditPoints;
+            this._id = maxId;
+            _allCourses.Add(this);
+
+            maxId++;
+
+        }
+        public Course(string title) : this(title, 3)
+        {
+
+        }
+
+
+        public ImmutableList<Student> Students
+        {
+            get
+            {
+                var allStudents = ImmutableList.CreateBuilder<Student>();
+
+                foreach (var item in CourseRegistrations)
+                {
+                    allStudents.Add(item.Student);
+                }
+
+                return allStudents.ToImmutableList();
+            }
+        }
+        public ImmutableList<CourseRegistration> CourseRegistrations
+        {
+            get
+            {
+                var allCourses = ImmutableList.CreateBuilder<CourseRegistration>();
+
+                foreach (var item in CourseRegistration.AllCourseRegistrations)
+                {
+                    if (this.Equals(item.Course)) allCourses.Add(item);
+                }
+
+                return allCourses.ToImmutableList();
+            }
+        }
 
         public override bool Equals(object? obj)
         {
@@ -28,27 +72,6 @@ namespace SchoolAdmin_Project
             return this.Id.GetHashCode();
         }
 
-        public Course(string title) : this(title, new List<Student>(), 3)
-        {
-
-        }
-        public Course(string title, List<Student> students) :this(title, students, 3)
-        {
-
-        }
-
-        public Course(string title, List<Student> students, byte creditPoints)
-        {
-            this.Title = title;
-            this.Students.AddRange(students);
-            CreditPoints = creditPoints;
-            this._id = maxId;
-
-            _allCourses.Add(this);
-
-            maxId++;
-
-        }
 
 
         public static ImmutableList<Course> AllCourses

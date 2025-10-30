@@ -217,16 +217,11 @@
 
         public static void DemoCourses()
         {
-
-
             Student said = new("Said Aziz", new DateTime(2000, 06, 1));
-
             Student mieke = new("Mieke Vermeulen", new DateTime(1998, 1, 1));
 
-            List<Student> listStudents = new() { said, mieke };
-
-            Course communicatie = new("Communicatie",listStudents,6);
-            Course programmeren = new("Programmeren",listStudents);
+            Course communicatie = new("Communicatie",6);
+            Course programmeren = new("Programmeren");
 
             Course webtechnologie = new("Webtechnologie");
             Course databanken = new("Databanken");
