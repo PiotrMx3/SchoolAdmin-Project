@@ -1,48 +1,289 @@
-﻿namespace SchoolAdmin_Project
+﻿using System;
+using System.Globalization;
+using System.Text.RegularExpressions;
+
+namespace SchoolAdmin_Project
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Wat Wil jij doen ?");
-            Console.WriteLine("1: DemonstreerStudenten uitvoren.");
-            Console.WriteLine("2: DemonstreerCursussen uitvoren.");
-            Console.WriteLine("3: CSV inlezen uitvoren.");
-            Console.WriteLine("4: DemoStudyProgram uitvoeren.");
-            Console.WriteLine("5: DemoAdministrativePersonnel uitvoeren.");
-            Console.WriteLine("6: DemoLectures uitvoeren.");
 
+            bool isRunning = true;
+            Student s1 = new("Anna Kowalska", new DateTime(2001, 3, 14));
+            Student s2 = new("Jan Nowak", new DateTime(2000, 11, 2));
+            Student s3 = new("Ewa Zielińska", new DateTime(2002, 6, 25));
+            Student s4 = new("Piotr Wiśniewski", new DateTime(1999, 9, 8));
+            Student s5 = new("Kamil Lewandowski", new DateTime(2003, 1, 17));
 
+            Course c1 = new("Programmeren in C#", 5);
+            Course c2 = new("Databanken", 4);
+            Course c3 = new("Webontwikkeling", 6);
+            Course c4 = new("Cloudsystemen", 3);
+            Course c5 = new("IT Essentials", 2);
 
-            string k = Console.ReadLine() ?? "";
-
-            switch (k)
+            while (isRunning)
             {
-                case "1":
-                    DemoStudents();
-                    break;
-                case "2":
-                    DemoCourses();
-                    break;
-                case "3":
-                    ReadTextFormatStudent();
-                    break;
-                case "4":
-                    DemoStudyProgram();
-                    break;
-                case "5":
-                    DemoAdministrativePersonnel();
-                    break;
-                case "6":
-                    DemoLectures();
-                    break;
-                default:
-                    Console.WriteLine("Fout maak een nieuwe keuze !");
-                    break;
+
+                Console.WriteLine("Wat Wil jij doen ?");
+                Console.WriteLine("0: Stopen");
+                Console.WriteLine("1: Demonstreer Studenten uitvoren");
+                Console.WriteLine("2: Demonstreer Cursussen uitvoren");
+                Console.WriteLine("3: Student uit tekstformaat inlezen");
+                Console.WriteLine("4: Demonstreer StudyProgram uitvoeren");
+                Console.WriteLine("5: Demonstreer AdministrativePersonnel uitvoeren");
+                Console.WriteLine("6: Demonstreer Lectoren uitvoeren");
+                Console.WriteLine("7: Student toevoegen");
+                Console.WriteLine("8: Cursus toevoegen");
+                Console.WriteLine("9: Vakinschrijving toevoegen");
+                Console.WriteLine("10: Inschrijvingegevens tonen");
+
+                string k = Console.ReadLine() ?? "";
+
+                switch (k)
+                {
+                    case "1":
+                        DemoStudents();
+                        break;
+                    case "2":
+                        DemoCourses();
+                        break;
+                    case "3":
+                        ReadTextFormatStudent();
+                        break;
+                    case "4":
+                        DemoStudyProgram();
+                        break;
+                    case "5":
+                        DemoAdministrativePersonnel();
+                        break;
+                    case "6":
+                        DemoLectures();
+                        break;
+                    case "7":
+                        AddStudent();
+                        break;
+                    case "8":
+                        AddCourse();
+                        break;
+                    case "9":
+                        AddCourseRegistration();
+                        break;
+                    case "10":
+                        ShowCourseRegistrations();
+                        break;
+                    case "0":
+                        isRunning = false;
+                        break;
+                    default:
+                        Console.WriteLine("Fout maak een nieuwe keuze !");
+                        break;
+                }
+
             }
 
         }
 
+        public static void ShowCourseRegistrations()
+        {
+            Console.WriteLine("Alle Studenten");
+            Console.WriteLine();
+
+            for (int i = 0; i < Student.AllStudents.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}: {Student.AllStudents[i].Name} ");
+            }
+
+            Console.WriteLine();
+
+            Console.WriteLine("Alle curssusen");
+            Console.WriteLine();
+
+            for (int i = 0; i < Course.AllCourses.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}: {Course.AllCourses[i].Title} ");
+            }
+
+            Console.WriteLine();
+
+
+            Console.WriteLine("Alle Inschrijvingen");
+            Console.WriteLine();
+
+            foreach (var item in CourseRegistration.AllCourseRegistrations)
+            {
+                Console.WriteLine($"{item.Student.Name} ingeschreven voor {item.Course.Title}");
+            }
+
+            Console.WriteLine();
+
+
+
+        }
+
+        public static void AddCourseRegistration()
+        {
+
+            if (Student.AllStudents.Count == 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Vaak inschrijving niet mogelijk!\nEr zijn geen studenten");
+                Console.WriteLine();
+                return;
+            }
+            else if (Course.AllCourses.Count == 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Vaak inschrijving niet mogelijk!\nEr zijn geen cursussen");
+                Console.WriteLine();
+                return;
+            }
+
+
+            Console.WriteLine("Welke Student ?");
+
+            Console.WriteLine();
+
+            for (int i = 0; i < Student.AllStudents.Count; i++)
+            {
+                Console.WriteLine($"{i+1}: {Student.AllStudents[i].Name} ");
+            }
+
+            Console.WriteLine();
+
+            int userChoiceStudent = Convert.ToInt16(Console.ReadLine());
+
+
+            Console.WriteLine("Welke Cursus ?");
+
+            Console.WriteLine();
+
+            for (int i = 0; i < Course.AllCourses.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}: {Course.AllCourses[i].Title} ");
+            }
+
+            Console.WriteLine();
+
+            int userChoiceCourse = Convert.ToInt16(Console.ReadLine());
+
+            Console.WriteLine();
+            Console.WriteLine("Wil jij een resultat toekennen  (ja/nee)?");
+
+            string addResultUser = Console.ReadLine() ?? "";
+
+
+            if(string.IsNullOrWhiteSpace(addResultUser))
+            {
+                Console.WriteLine();
+                Console.WriteLine("Antwoordt mag niet leeg zijn");
+                Console.WriteLine();
+                return;
+            }
+
+            if(addResultUser.ToLower() == "ja" )
+            {
+                Console.WriteLine();
+                Console.WriteLine("Wat is het resultaat ?");
+                byte resultatFromUser = Convert.ToByte(Console.ReadLine());
+                Console.WriteLine();
+
+                CourseRegistration cr = new CourseRegistration(Course.AllCourses[userChoiceCourse - 1], resultatFromUser, Student.AllStudents[userChoiceStudent - 1]);
+
+            }
+            else if(addResultUser.ToLower() == "nee") 
+            {
+                CourseRegistration cr = new CourseRegistration(Course.AllCourses[userChoiceCourse - 1], null, Student.AllStudents[userChoiceStudent - 1]);
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("Veerkerde keuze probeer op het nieuw !");
+                Console.WriteLine();
+            }
+
+
+
+
+
+        }
+
+        public static void AddCourse()
+        {
+            Console.WriteLine("Titel van de cursus ?");
+            string courseUser = Console.ReadLine() ?? "";
+            Console.WriteLine("Aantal studiepunten ?");
+            string studyPoint = Console.ReadLine() ?? "";
+            byte parsed = 0;
+
+            if(byte.TryParse(studyPoint, out parsed))
+            {
+                Course c = new Course(courseUser, parsed);
+                Console.WriteLine();
+                Console.WriteLine($"Cursus: {c.Title}\nStudiepunten: {c.CreditPoints}\nSuccesvol aangemaakt\n");
+                Console.WriteLine();
+
+            }
+            else
+            {
+                Console.WriteLine("Studiepunten moet een getal zijn !");
+                Console.WriteLine();
+            }
+
+        }
+
+
+        public static void AddStudent()
+        {
+            bool isInvalid;
+            string studentName = "";
+            DateTime birthDate = DateTime.MinValue;
+            CultureInfo dutch = new CultureInfo("nl-BE");
+
+            do
+            {
+                isInvalid = false;
+
+                Console.WriteLine("Naam van de student?");
+                studentName = Console.ReadLine() ?? "";
+
+                Console.WriteLine("Geboortdatum van de student ? (dd/MM/jjjj)");
+                string birthDateToParse = Console.ReadLine() ?? "";
+
+                if(string.IsNullOrWhiteSpace(studentName) | string.IsNullOrWhiteSpace(birthDateToParse))
+                {
+                    Console.WriteLine("Naam of Geboortdatum mag niet leeg zijn !");
+                    Console.WriteLine("Probeer op het nieuw !");
+                    Console.WriteLine();
+
+                    isInvalid = true;
+                }
+                else
+                {
+
+                    if (DateTime.TryParse(birthDateToParse, out DateTime result))
+                    {
+                        birthDate = result;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Formaat moet dd/MM/jjjj zijn !");
+                        Console.WriteLine();
+                        isInvalid = true;
+                    }
+
+                }
+
+            } while (isInvalid);
+
+
+            Student newStudent = new Student(studentName, birthDate);
+
+            Console.WriteLine();
+            Console.WriteLine($"Student: {newStudent.Name}\n" +
+                $"Gebooren op: {newStudent.Birthdate.ToString("d",dutch)} is aangemaakt");
+
+        }
 
         public static void DemoLectures()
         {

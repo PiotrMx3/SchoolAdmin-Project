@@ -29,13 +29,13 @@ namespace SchoolAdmin_Project
         {
 
         }
-
         public Course(Course course)
         {
             Title = course.Title;
             CreditPoints = course.CreditPoints;
             this._id = course.Id;
         }
+
 
 
         public ImmutableList<Student> Students
