@@ -10,32 +10,32 @@ namespace SchoolAdmin_Project
         {
 
             bool isRunning = true;
-            Student s1 = new("Anna Kowalska", new DateTime(2001, 3, 14));
-            Student s2 = new("Jan Nowak", new DateTime(2000, 11, 2));
-            Student s3 = new("Ewa Zielińska", new DateTime(2002, 6, 25));
-            Student s4 = new("Piotr Wiśniewski", new DateTime(1999, 9, 8));
-            Student s5 = new("Kamil Lewandowski", new DateTime(2003, 1, 17));
+            //Student s1 = new("Anna Kowalska", new DateTime(2001, 3, 14));
+            //Student s2 = new("Jan Nowak", new DateTime(2000, 11, 2));
+            //Student s3 = new("Ewa Zielińska", new DateTime(2002, 6, 25));
+            //Student s4 = new("Piotr Wiśniewski", new DateTime(1999, 9, 8));
+            //Student s5 = new("Kamil Lewandowski", new DateTime(2003, 1, 17));
 
-            Course c1 = new("Programmeren in C#", 5);
-            Course c2 = new("Databanken", 4);
-            Course c3 = new("Webontwikkeling", 6);
-            Course c4 = new("Cloudsystemen", 3);
-            Course c5 = new("IT Essentials", 2);
+            //Course c1 = new("Programmeren in C#", 5);
+            //Course c2 = new("Databanken", 4);
+            //Course c3 = new("Webontwikkeling", 6);
+            //Course c4 = new("Cloudsystemen", 3);
+            //Course c5 = new("IT Essentials", 2);
 
             while (isRunning)
             {
 
                 Console.WriteLine("Wat Wil jij doen ?");
-                Console.WriteLine("0: Stopen");
-                Console.WriteLine("1: Demonstreer Studenten uitvoren");
-                Console.WriteLine("2: Demonstreer Cursussen uitvoren");
-                Console.WriteLine("3: Student uit tekstformaat inlezen");
-                Console.WriteLine("4: Demonstreer StudyProgram uitvoeren");
-                Console.WriteLine("5: Demonstreer AdministrativePersonnel uitvoeren");
-                Console.WriteLine("6: Demonstreer Lectoren uitvoeren");
-                Console.WriteLine("7: Student toevoegen");
-                Console.WriteLine("8: Cursus toevoegen");
-                Console.WriteLine("9: Vakinschrijving toevoegen");
+                Console.WriteLine("0:  Stopen");
+                Console.WriteLine("1:  Demonstreer Studenten uitvoren");
+                Console.WriteLine("2:  Demonstreer Cursussen uitvoren");
+                Console.WriteLine("3:  Student uit tekstformaat inlezen");
+                Console.WriteLine("4:  Demonstreer StudyProgram uitvoeren");
+                Console.WriteLine("5:  Demonstreer AdministrativePersonnel uitvoeren");
+                Console.WriteLine("6:  Demonstreer Lectoren uitvoeren");
+                Console.WriteLine("7:  Student toevoegen");
+                Console.WriteLine("8:  Cursus toevoegen");
+                Console.WriteLine("9:  Vakinschrijving toevoegen");
                 Console.WriteLine("10: Inschrijvingegevens tonen");
 
                 string k = Console.ReadLine() ?? "";
@@ -218,10 +218,18 @@ namespace SchoolAdmin_Project
 
             if(byte.TryParse(studyPoint, out parsed))
             {
-                Course c = new Course(courseUser, parsed);
-                Console.WriteLine();
-                Console.WriteLine($"Cursus: {c.Title}\nStudiepunten: {c.CreditPoints}\nSuccesvol aangemaakt\n");
-                Console.WriteLine();
+                try
+                {
+                    Course c = new Course(courseUser, parsed);
+                    Console.WriteLine();
+                    Console.WriteLine($"Cursus: {c.Title}\nStudiepunten: {c.CreditPoints}\nSuccesvol aangemaakt\n");
+                    Console.WriteLine();
+                }
+                catch (DuplicateDataException e)
+                {
+                    Console.WriteLine($"{e.Message}\n" +
+                        $"Id van de reeds bestaande cursus is: {((Course)e.Object2).Id}");
+                }
 
             }
             else

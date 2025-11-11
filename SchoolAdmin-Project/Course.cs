@@ -19,14 +19,17 @@ namespace SchoolAdmin_Project
         {
             this.Title = title;
             CreditPoints = creditPoints;
+
+            Course? exits = _allCourses.Find(e => e.Title.Equals(this.Title, StringComparison.OrdinalIgnoreCase));
+
+            if (exits is not null) throw new DuplicateDataException("Nieuwe cursus heeft dezelfde naam als een bestaande cursus.", this, exits);
+
             this._id = maxId;
             _allCourses.Add(this);
-
             maxId++;
-
         }
         public Course(string title) : this(title, 3)
-        {
+        { 
 
         }
         public Course(Course course)
