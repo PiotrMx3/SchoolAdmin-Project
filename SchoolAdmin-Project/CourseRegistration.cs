@@ -17,7 +17,12 @@ namespace SchoolAdmin_Project
 
         public CourseRegistration(Course course, byte? result, Student student)
         {
+
+            
             Course = course;
+            if (_allCourseRegistrations.Count() == 20) throw new CapacityExceededException($"Er zijn al teveel studenten ingeschrijven voor {Course.Title}");
+
+
             Student = student;
 
             foreach (CourseRegistration r in _allCourseRegistrations)

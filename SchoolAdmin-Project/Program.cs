@@ -198,6 +198,11 @@ namespace SchoolAdmin_Project
 
                     Console.WriteLine($"{e.Message}");
                 }
+                catch (CapacityExceededException e)
+                {
+
+                    Console.WriteLine($"{e.Message}");
+                }
 
             }
             else if (addResultUser.ToLower() == "nee")
@@ -208,6 +213,11 @@ namespace SchoolAdmin_Project
                     CourseRegistration cr = new CourseRegistration(Course.AllCourses[userChoiceCourse - 1], null, Student.AllStudents[userChoiceStudent - 1]);
                 }
                 catch (ArgumentException e)
+                {
+
+                    Console.WriteLine($"{e.Message}");
+                }
+                catch (CapacityExceededException e)
                 {
 
                     Console.WriteLine($"{e.Message}");
