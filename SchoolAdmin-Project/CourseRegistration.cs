@@ -18,16 +18,21 @@ namespace SchoolAdmin_Project
         public CourseRegistration(Course course, byte? result, Student student)
         {
             Course = course;
+            Student = student;
             Result = result;
-            this._student = student;
 
             _allCourseRegistrations.Add(this);
         }
-         
+
         public Student Student
         {
             get { return this._student; }
- 
+            private set
+            {
+                if (value is null) throw new ArgumentException("Student/cursus mag niet ontbreken.");
+                this._student = value;
+            }
+
         }
 
 
@@ -59,7 +64,11 @@ namespace SchoolAdmin_Project
         public Course Course
         {
             get { return this._course; }
-            set { this._course = value; }
+            private set
+            {
+                if (value is null) throw new ArgumentException("Student/cursus mag niet ontbreken.");
+                this._course = value;
+            }
 
         }
 

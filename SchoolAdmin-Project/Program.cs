@@ -146,7 +146,7 @@ namespace SchoolAdmin_Project
 
             for (int i = 0; i < Student.AllStudents.Count; i++)
             {
-                Console.WriteLine($"{i+1}: {Student.AllStudents[i].Name} ");
+                Console.WriteLine($"{i + 1}: {Student.AllStudents[i].Name} ");
             }
 
             Console.WriteLine();
@@ -173,7 +173,7 @@ namespace SchoolAdmin_Project
             string addResultUser = Console.ReadLine() ?? "";
 
 
-            if(string.IsNullOrWhiteSpace(addResultUser))
+            if (string.IsNullOrWhiteSpace(addResultUser))
             {
                 Console.WriteLine();
                 Console.WriteLine("Antwoordt mag niet leeg zijn");
@@ -181,19 +181,37 @@ namespace SchoolAdmin_Project
                 return;
             }
 
-            if(addResultUser.ToLower() == "ja" )
+            if (addResultUser.ToLower() == "ja")
             {
                 Console.WriteLine();
                 Console.WriteLine("Wat is het resultaat ?");
                 byte resultatFromUser = Convert.ToByte(Console.ReadLine());
                 Console.WriteLine();
 
-                CourseRegistration cr = new CourseRegistration(Course.AllCourses[userChoiceCourse - 1], resultatFromUser, Student.AllStudents[userChoiceStudent - 1]);
+                try
+                {
+
+                    CourseRegistration cr = new CourseRegistration(Course.AllCourses[userChoiceCourse - 1], resultatFromUser, Student.AllStudents[userChoiceStudent - 1]);
+                }
+                catch (ArgumentException e)
+                {
+
+                    Console.WriteLine($"{e.Message}");
+                }
 
             }
-            else if(addResultUser.ToLower() == "nee") 
+            else if (addResultUser.ToLower() == "nee")
             {
-                CourseRegistration cr = new CourseRegistration(Course.AllCourses[userChoiceCourse - 1], null, Student.AllStudents[userChoiceStudent - 1]);
+                try
+                {
+
+                    CourseRegistration cr = new CourseRegistration(Course.AllCourses[userChoiceCourse - 1], null, Student.AllStudents[userChoiceStudent - 1]);
+                }
+                catch (ArgumentException e)
+                {
+
+                    Console.WriteLine($"{e.Message}");
+                }
             }
             else
             {
@@ -201,10 +219,6 @@ namespace SchoolAdmin_Project
                 Console.WriteLine("Veerkerde keuze probeer op het nieuw !");
                 Console.WriteLine();
             }
-
-
-
-
 
         }
 
@@ -216,7 +230,7 @@ namespace SchoolAdmin_Project
             string studyPoint = Console.ReadLine() ?? "";
             byte parsed = 0;
 
-            if(byte.TryParse(studyPoint, out parsed))
+            if (byte.TryParse(studyPoint, out parsed))
             {
                 try
                 {
@@ -258,7 +272,7 @@ namespace SchoolAdmin_Project
                 Console.WriteLine("Geboortdatum van de student ? (dd/MM/jjjj)");
                 string birthDateToParse = Console.ReadLine() ?? "";
 
-                if(string.IsNullOrWhiteSpace(studentName) | string.IsNullOrWhiteSpace(birthDateToParse))
+                if (string.IsNullOrWhiteSpace(studentName) | string.IsNullOrWhiteSpace(birthDateToParse))
                 {
                     Console.WriteLine("Naam of Geboortdatum mag niet leeg zijn !");
                     Console.WriteLine("Probeer op het nieuw !");
@@ -289,7 +303,7 @@ namespace SchoolAdmin_Project
 
             Console.WriteLine();
             Console.WriteLine($"Student: {newStudent.Name}\n" +
-                $"Gebooren op: {newStudent.Birthdate.ToString("d",dutch)} is aangemaakt");
+                $"Gebooren op: {newStudent.Birthdate.ToString("d", dutch)} is aangemaakt");
 
         }
 
@@ -299,7 +313,7 @@ namespace SchoolAdmin_Project
             Course course2 = new Course("Statistiek");
             Course course3 = new Course("Analytische meetkunde");
 
-            Lector anna = new Lector("Anna", new DateTime(1990,02,01), new Dictionary<Course, byte> { { course1, 3 }, {course2, 3 }, {course3, 4 } });
+            Lector anna = new Lector("Anna", new DateTime(1990, 02, 01), new Dictionary<Course, byte> { { course1, 3 }, { course2, 3 }, { course3, 4 } });
             anna.Seniority = 9;
 
             foreach (var item in Lector.AllLectors)
@@ -313,7 +327,7 @@ namespace SchoolAdmin_Project
 
         public static void DemoAdministrativePersonnel()
         {
-            AdministrativePersonnel ahmed = new AdministrativePersonnel("Ahmed Azzaoui", new DateTime(1988,02,04), new Dictionary<string, byte> { {"Roostering", 10 }, {"Correspondentie", 10 }, {"Animatie", 10 } });
+            AdministrativePersonnel ahmed = new AdministrativePersonnel("Ahmed Azzaoui", new DateTime(1988, 02, 04), new Dictionary<string, byte> { { "Roostering", 10 }, { "Correspondentie", 10 }, { "Animatie", 10 } });
             ahmed.Seniority = 7;
 
             foreach (var item in AdministrativePersonnel.AdministrativeStaff)
@@ -442,7 +456,7 @@ namespace SchoolAdmin_Project
             Student said = new("Said Aziz", new DateTime(2000, 06, 1));
             Student mieke = new("Mieke Vermeulen", new DateTime(1998, 1, 1));
 
-            Course communicatie = new("Communicatie",6);
+            Course communicatie = new("Communicatie", 6);
             Course programmeren = new("Programmeren");
 
             Course webtechnologie = new("Webtechnologie");
@@ -492,12 +506,12 @@ namespace SchoolAdmin_Project
 
             said.ShowOverview();
 
-           
+
             Student mieke = new("Mieke Vermeulen", new DateTime(1998, 1, 1));
 
 
-            mieke.RegisterCourseResult(comunication,13);
-            mieke.RegisterCourseResult(programing,16);
+            mieke.RegisterCourseResult(comunication, 13);
+            mieke.RegisterCourseResult(programing, 16);
             mieke.RegisterCourseResult(databases, 14);
 
 
