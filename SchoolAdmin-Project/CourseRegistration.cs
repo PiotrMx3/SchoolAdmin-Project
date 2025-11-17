@@ -19,6 +19,12 @@ namespace SchoolAdmin_Project
         {
             Course = course;
             Student = student;
+
+            foreach (CourseRegistration r in _allCourseRegistrations)
+            {
+                if (r.Student.Name.Equals(student.Name, StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("Een student kan niet meermaals inschrijven voor dezelfde cursus.");
+            }
+
             Result = result;
 
             _allCourseRegistrations.Add(this);
