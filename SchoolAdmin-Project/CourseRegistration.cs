@@ -22,12 +22,9 @@ namespace SchoolAdmin_Project
             Course = course;
             if (_allCourseRegistrations.Count() == 20) throw new CapacityExceededException($"Er zijn al teveel studenten ingeschrijven voor {Course.Title}");
 
-
-            Student = student;
-
             foreach (CourseRegistration r in _allCourseRegistrations)
             {
-                if (r.Student.Name.Equals(student.Name, StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("Een student kan niet meermaals inschrijven voor dezelfde cursus.");
+                if (r.Student == student && r.Course == course) throw new ArgumentException("Een student kan niet meermaals inschrijven voor dezelfde cursus.");
             }
 
             Result = result;

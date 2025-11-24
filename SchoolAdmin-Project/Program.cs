@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -10,17 +11,26 @@ namespace SchoolAdmin_Project
         {
 
             bool isRunning = true;
-            //Student s1 = new("Anna Kowalska", new DateTime(2001, 3, 14));
-            //Student s2 = new("Jan Nowak", new DateTime(2000, 11, 2));
-            //Student s3 = new("Ewa Zielińska", new DateTime(2002, 6, 25));
-            //Student s4 = new("Piotr Wiśniewski", new DateTime(1999, 9, 8));
-            //Student s5 = new("Kamil Lewandowski", new DateTime(2003, 1, 17));
 
-            //Course c1 = new("Programmeren in C#", 5);
-            //Course c2 = new("Databanken", 4);
-            //Course c3 = new("Webontwikkeling", 6);
-            //Course c4 = new("Cloudsystemen", 3);
-            //Course c5 = new("IT Essentials", 2);
+
+            Student s1 = new Student("Jan Peeters", new DateTime(2001, 5, 12));
+            Student s2 = new Student("Lotte Maes", new DateTime(2002, 8, 23));
+            Student s3 = new Student("Thomas Willems", new DateTime(2000, 11, 4));
+            Student s4 = new Student("Sofie Mertens", new DateTime(2003, 2, 15));
+            Student s5 = new Student("Bram Jacobs", new DateTime(2001, 7, 30));
+            Student s6 = new Student("Emma Dubois", new DateTime(2002, 4, 10));
+
+
+            Course c6 = new("Algoritmen en Datastructuren", 6);
+            Course c7 = new("Software Security", 4);
+            Course c8 = new("Mobile Development", 5);
+            Course c9 = new("Artificiële Intelligentie", 7);
+            Course c10 = new("Business Analysis", 3);
+            Course c11 = new("Project Management", 4);
+            Course c12 = new("Internet of Things", 5);
+            Course c13 = new("User Experience Design", 3);
+            Course c14 = new("Big Data", 6);
+            Course c15 = new("Computer Netwerken", 5);
 
             while (isRunning)
             {
@@ -37,6 +47,9 @@ namespace SchoolAdmin_Project
                 Console.WriteLine("8:  Cursus toevoegen");
                 Console.WriteLine("9:  Vakinschrijving toevoegen");
                 Console.WriteLine("10: Inschrijvingegevens tonen");
+                Console.WriteLine("11: Studenten tonen");
+                Console.WriteLine("12: Cursussen tonen");
+
 
                 string k = Console.ReadLine() ?? "";
 
@@ -72,6 +85,12 @@ namespace SchoolAdmin_Project
                     case "10":
                         ShowCourseRegistrations();
                         break;
+                    case "11":
+                        ShowStudents();
+                        break;
+                    case "12":
+                        ShowCourses();
+                        break;
                     case "0":
                         isRunning = false;
                         break;
@@ -80,6 +99,66 @@ namespace SchoolAdmin_Project
                         break;
                 }
 
+            }
+
+        }
+
+
+        public static void ShowCourses()
+        {
+            Console.WriteLine("In welke volgorde wil je cursussen tonen ?");
+            Console.WriteLine("1. Stijgend alfabetisch");
+            Console.WriteLine("2. Volgens Studiepunten");
+
+            ImmutableList<Course> sorted;
+
+            string userChoice = Console.ReadLine() ?? "";
+
+            if (userChoice == "") return;
+
+            if (userChoice == "1")
+            {
+                sorted = Course.AllCourses.Sort(new CoursesSortByTitle());
+            }
+            else
+            {
+                sorted = Course.AllCourses.Sort(new CoursesSortByCreditPoints());
+
+            }
+
+            foreach (Course course in sorted)
+            {
+                Console.WriteLine(course);
+                Console.WriteLine();
+            }
+        }
+
+        public static void ShowStudents()
+        {
+            Console.WriteLine("In welke volgorde wil je studenten tonen ?");
+            Console.WriteLine("1. Oplopend volgens Naam");
+            Console.WriteLine("2. Aflopend volgens Naam");
+
+            ImmutableList<Student> sorted;
+
+            string userChoice = Console.ReadLine() ?? "";
+
+            if (userChoice == "") return;
+
+            if (userChoice == "1")
+            {
+               sorted = Student.AllStudents.Sort(new StudentsAscendingByName());
+            }
+            else
+            {
+               sorted = Student.AllStudents.Sort(new StudentsDescendingByName());
+
+            }
+
+            foreach (Student student in sorted)
+            {
+                Console.WriteLine(student.Name);
+                Console.WriteLine();
             }
 
         }

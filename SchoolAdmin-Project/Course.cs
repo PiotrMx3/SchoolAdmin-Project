@@ -119,5 +119,10 @@ namespace SchoolAdmin_Project
             }
         }
 
+        public override string ToString()
+        {
+            return $"{this.Title} ({this.CreditPoints})";
+        }
+
     }
 }
